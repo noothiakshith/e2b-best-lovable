@@ -33,7 +33,7 @@ export default defineConfig({
     };
 
     const initialState = {
-        messages: [new HumanMessage("Create a functional trello board just mvp using with great frontend and design dont use any external libraries and use only tailwind  ")],
+        messages: [new HumanMessage("Create a fully frontend version for todo application using the local storage and make sure use the best design and no other external libraries anything code from scrath urslef  ")],
         sandbox: {
             id: sandboxId,
             rootDir: "/home/user/app",
