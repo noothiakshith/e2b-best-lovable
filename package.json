@@ -1,0 +1,25 @@
+{
+  "name": "e2b",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@e2b/code-interpreter": "^2.3.3",
+    "@langchain/core": "^1.1.16",
+    "@langchain/langgraph": "^1.1.1",
+    "@langchain/mistralai": "^1.0.3",
+    "dotenv": "^17.2.3",
+    "e2b": "^2.10.3",
+    "zod": "^4.3.5"
+  },
+  "scripts": {
+    "e2b:build:dev": "cd sathwik && npx tsx build.dev.ts",
+    "e2b:build:prod": "cd sathwik && npx tsx build.prod.ts"
+  }
+}
