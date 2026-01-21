@@ -27,28 +27,19 @@ export const reviewerNode = async (state: ProjectState, config: any) => {
     - Do not loop. run the check once.
     `;
 
-    // 1. Get recent messages
-    let recentMessages = state.messages.slice(-10);
 
-    // 2. SANITIZATION FIX: Remove orphaned ToolMessages at the start
-    // If the slice cuts off the AIMessage that called the tool, the ToolMessage is invalid on its own.
-    while (recentMessages.length > 0 && recentMessages[0].getType() === "tool") {
-        console.log("🧹 Removing orphaned ToolMessage to prevent API error...");
-        recentMessages.shift();
-    }
 
     const triggerMessage = new HumanMessage("Run the build / QA check now.");
 
     try {
         const response = await llm.invoke([
             new SystemMessage(systemPrompt),
-            ...recentMessages,
             triggerMessage
         ]);
 
         console.log("🤖 Reviewer Thought:", response.content);
         
-        // --- DEPLOYMENT LOGIC ---
+
         const content = response.content as string;
         
         if (content.toUpperCase().includes("BUILD SUCCESSFUL")) {

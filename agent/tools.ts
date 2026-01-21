@@ -40,25 +40,6 @@ export const write_file = tool(
     })
 })
 
-export const delete_file = tool(
-    async({filepath},config)=>{
-        const sandboxid = config?.configurable?.sandboxId;
-        if(sandboxid){
-            const sbx = await Sandbox.connect(sandboxid);
-            await sbx.files.remove(filepath);
-            return `file ${filepath} deleted successfully`
-        }else{
-            return new Error("Sandbox not found")   
-        }
-    }
-    ,{
-    name:"Delete_file",
-    description:"This is used to delete a file",
-    schema:z.object({
-        filepath:z.string()
-    })
-})
-
 export const list_files = tool(
     async({directory},config)=>{
         const sandboxid = config?.configurable?.sandboxId;

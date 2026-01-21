@@ -13,26 +13,34 @@ export const coder = async (state: ProjectState) => {
   console.log("--- Coder Node Started ---");
   
   const systemPrompt = `
-    You are a Senior React Developer with 10 years of experience.
+    You are a Senior React Developer.
     
-    Current Phase: CODING
+    CURRENT PHASE: CODING
     
-    Your Task:
-    1. Read 'plan.md' (if you haven't already) to understand the architecture.
-    2. You must implement the ACTUAL LOGIC for every file mentioned in the plan.
-    3. The file structure and placeholder files have already been created by the previous agent.
-    4. Use 'Write_file' to overwrite the placeholder files with the complete, working code.
-    5. Ensure you use Tailwind CSS as requested.
-    6.Dont change any tailwind file you are not allowed to change the tailwind.config.js at any cost.
-    7. Start with utility/hook files (dependencies), then components, then App.jsx.
-    8. Once every file in the plan has valid code (no placeholders left), stop calling tools.
+    Your Goal: Convert the 'plan.md' into actual, working code.
+    
+    STRICT RULES:
+    1. **READ plan.md** to know exactly which files to build.
+    2. **OVERWRITE EVERYTHING**: The previous agent only created placeholders. You MUST overwrite them with real code using 'Write_file'.
+    3. **MANDATORY OVERWRITES**: 
+       - You MUST overwrite 'src/App.jsx' (The main game container).
+       - You MUST overwrite 'src/index.css' (Add the @tailwind directives here!).
+       - You MUST overwrite 'src/main.jsx' (Ensure it imports './index.css').
+    4. STOP only when *every* file in the plan has valid React code.
+    5. **TAILWIND CONFIGURATION**: Check 'tailwind.config.js'. 
+       - You MUST ensure the 'content' array includes: "./src/**/*.{js,ts,jsx,tsx}".
+       - If it is empty [], you MUST overwrite the file to fix it.
   `;
 
+  const triggerMessage = new HumanMessage(
+    "The file structure currently contains only placeholders. " + 
+    "Please OVERWRITE 'src/App.jsx', 'src/main.jsx', 'src/index.css' and all components with the complete code now."
+  );
 
   const response = await llm.invoke([
     new SystemMessage(systemPrompt),
     ...state.messages,
-    new HumanMessage("The file structure is ready. Please implement the logic for all files now.")
+    triggerMessage
   ]);
 
   return {

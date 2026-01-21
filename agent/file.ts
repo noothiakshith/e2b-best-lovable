@@ -21,12 +21,11 @@ export const fileNode = async (state: ProjectState) => {
 
     RULES:
     1. Read 'plan.md' to understand the folder structure.
-
     2. Use 'Make_dir' to create all necessary folders (src/components, src/hooks, etc.).
     3. Use 'Write_file' to create *NEW* files (e.g., Board.jsx, useTicTacToe.js).
-    4. **CRITICAL SAFETY**: Do NOT overwrite 'vite.config.js', 'package.json', 'src/main.jsx', 'index.html', or 'src/App.jsx' if they already exist.
-    5. For new files, write ONLY a comment: "// Placeholder content".
-    6. Do NOT write the actual implementation logic yet.
+    4. **CRITICAL**: You ARE ALLOWED to overwrite 'src/App.jsx' and 'src/main.jsx' with placeholders if the plan requires it.
+    5. Do NOT overwrite 'vite.config.js', 'package.json', or 'tailwind.config.js'.
+    6. For new files, write ONLY a comment: "// Placeholder content".
     `;
 
     const triggerMessage = new HumanMessage("The plan is created. Please execute the file structure creation now.");
