@@ -10,7 +10,7 @@ const llm = new ChatMistralAI({
 }).bindTools(tools);
 
 export const reviewerNode = async (state: ProjectState, config: any) => {
-    console.log("\n--- 🕵️ Reviewer Node Started ---");
+    console.log("\n---  Reviewer Node Started ---");
 
     const systemPrompt = `
     You are a QA / Build Engineer.

@@ -9,7 +9,7 @@ import { Sandbox } from '@e2b/code-interpreter';
 
 
 const deployNode = async (state: ProjectState, config: any) => {
-    console.log("🚀 Starting Development Server...");
+    console.log(" Starting Development Server...");
     try {
         const sandboxId = config.configurable.sandboxId;
         const sbx = await Sandbox.connect(sandboxId);
@@ -60,7 +60,6 @@ const agent = new StateGraph(StateAnnotation)
         return "deployer"; 
     })
 
-    // The deployer goes to END
     .addEdge("deployer", END)
 
     .addConditionalEdges("tools", (state) => {
